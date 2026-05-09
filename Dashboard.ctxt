@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.target=Dashboard
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Dashboard\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=v
+comment1.target=void\ configurarVisualizador(VisualizadorDatos)
+comment2.params=infoAlmacen\ infoCadenas
+comment2.target=void\ mostrarEstado(java.lang.String,\ java.lang.String)
+comment3.params=texto
+comment3.target=void\ mostrarMensaje(java.lang.String)
+comment4.params=error
+comment4.target=void\ mostrarError(java.lang.String)
+numComments=5

@@ -27,4 +27,12 @@ public abstract class Trabajador
         this.puesto = puesto;
         this.fechaIngreso = fechaIngreso;
     }
+    public String obtenerDni() { return dni; }
+    public String obtenerNombre() { return nombre; }
+    public String obtenerApellidos() { return apellidos; }
+    public String obtenerDireccion() { return direccion; }
+    public int obtenerNumSeguridadSocial() { return numSeguridadSocial; }
+    public double obtenerSalario() { return salario; }
+    public String obtenerPuesto() { return puesto; }
+    public Date obtenerFechaIngreso() { return fechaIngreso; }
 }

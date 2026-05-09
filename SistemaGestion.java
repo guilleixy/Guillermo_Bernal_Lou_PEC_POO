@@ -7,11 +7,13 @@
  */
 public class SistemaGestion {
     private IAlmacen almacen;
-    private List<Trabajador> trabajadores;
-
-    public SistemaGestion(IAlmacen almacen) {
+    private RecursosHumanos rrhh;
+    private Dashboard dashboard;
+    
+    public SistemaGestion(IAlmacen almacen, RecursosHumanos rrhh) {
         this.almacen = almacen;
-        this.trabajadores = new ArrayList<>();
+        this.rrhh = rrhh;
+        Dashboard.configurarVisualizador(new VisualizadorTerminal());
     }
     
 
