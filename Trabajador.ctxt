@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.target=Trabajador
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Trabajador\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=dni\ nombre\ apellidos\ direccion\ numSeguridadSocial\ salario\ puesto\ fechaIngreso
+comment1.target=Trabajador(java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ int,\ double,\ java.lang.String,\ java.util.Date)
+numComments=2

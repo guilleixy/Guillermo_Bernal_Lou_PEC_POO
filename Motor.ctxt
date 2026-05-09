@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=Motor
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Motor\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=cilindrada\ potencia\ numCilindros
+comment1.target=Motor(int,\ int,\ int)
+comment2.params=
+comment2.target=java.lang.String\ obtenerDatosTecnicos()
+numComments=3

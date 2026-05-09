@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=MotorGasolina
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ MotorGasolina\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=cilindrada\ potencia\ numCilindros
+comment1.target=MotorGasolina(int,\ int,\ int)
+comment2.params=
+comment2.target=java.lang.String\ obtenerIdentificador()
+numComments=3
