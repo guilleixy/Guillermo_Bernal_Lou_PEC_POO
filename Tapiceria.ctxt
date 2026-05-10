@@ -1,10 +1,23 @@
 #BlueJ class context
 comment0.target=Tapiceria
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Tapiceria\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Clase\ que\ representa\ la\ tapicer\u00EDa\ de\ un\ veh\u00EDculo\ dentro\ del\ sistema\ de\ la\ f\u00E1brica.\r\n\ Almacena\ informaci\u00F3n\ sobre\ el\ material,\ color\ y\ cantidad\ de\ tela\ utilizada.\r\n\ @author\ Guillermo\ Bernal\r\n\ @version\ 10\ de\ mayo\ de\ 2026\r\n
 comment1.params=color\ metrosCuadradosTela\ material
 comment1.target=Tapiceria(java.lang.String,\ double,\ TapiceriaTipoMaterial)
+comment1.text=\r\n\ Constructor\ para\ la\ clase\ Tapiceria.\r\n\ @param\ color\ Tono\ crom\u00E1tico\ de\ la\ tapicer\u00EDa.\r\n\ @param\ metrosCuadradosTela\ Cantidad\ de\ material\ necesaria.\r\n\ @param\ material\ Tipo\ de\ tejido\ (TELA,\ CUERO\ o\ ALCANTARA).\r\n
 comment2.params=
-comment2.target=java.lang.String\ obtenerDatosTecnicos()
+comment2.target=java.lang.String\ obtenerColor()
 comment3.params=
-comment3.target=java.lang.String\ obtenerIdentificador()
-numComments=4
+comment3.target=double\ obtenerMetrosCuadradosTela()
+comment4.params=
+comment4.target=TapiceriaTipoMaterial\ obtenerMaterial()
+comment5.params=metrosCuadradosTela
+comment5.target=void\ establecerMetrosCuadradosTela(double)
+comment6.params=color
+comment6.target=void\ establecerColor(java.lang.String)
+comment7.params=material
+comment7.target=void\ establecerMaterial(TapiceriaTipoMaterial)
+comment8.params=
+comment8.target=java.lang.String\ obtenerDatosTecnicos()
+comment9.params=
+comment9.target=java.lang.String\ obtenerIdentificador()
+numComments=10

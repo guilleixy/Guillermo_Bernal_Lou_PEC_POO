@@ -1,9 +1,7 @@
-
 /**
- * Write a description of class MotorGasolina here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * Representa un motor de tipo gasolina.
+ * @author Guillermo Bernal
+ * @version 10 de mayo de 2026
  */
 public class MotorGasolina extends Motor
 {

@@ -1,4 +1,4 @@
 #BlueJ class context
 comment0.target=RuedasTipo
-comment0.text=\r\n\ Enumeration\ class\ RuedasTipos\ -\ write\ a\ description\ of\ the\ enum\ class\ here\r\n\ \r\n\ @author\ (your\ name\ here)\r\n\ @version\ (version\ number\ or\ date\ here)\r\n
+comment0.text=\r\n\ Tipos\ de\ ruedas\ disponibles\:\ normal,\ deportivo\ y\ todoterreno.\r\n\ @author\ Guillermo\ Bernal\r\n\ @version\ 10\ de\ mayo\ de\ 2026\r\n
 numComments=1

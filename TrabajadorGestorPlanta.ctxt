@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=TrabajadorGestorPlanta
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ TrabajadorOperario\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Representa\ al\ personal\ responsable\ de\ la\ gesti\u00F3n\ de\ la\ planta.\r\n\ @author\ Guillermo\ Bernal\r\n\ @version\ 10\ de\ mayo\ de\ 2026\r\n
 comment1.params=dni\ nombre\ apellidos\ direccion\ numSeguridadSocial\ salario\ puesto\ fechaIngreso
 comment1.target=TrabajadorGestorPlanta(java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ int,\ double,\ TrabajadorPuesto,\ java.util.Date)
 numComments=2

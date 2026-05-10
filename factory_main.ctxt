@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=factory_main
+comment0.text=\r\n\ Clase\ principal\ encargada\ de\ la\ instanciaci\u00F3n\ y\ arranque\ del\ sistema.\r\n\ @author\ Guillermo\ Bernal\r\n\ @version\ 10\ de\ mayo\ de\ 2026\r\n
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment1.text=\r\n\ Punto\ de\ entrada\ de\ la\ aplicaci\u00F3n.\r\n\ @param\ args\ Argumentos\ de\ l\u00EDnea\ de\ comandos.\r\n
+numComments=2

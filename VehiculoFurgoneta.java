@@ -1,9 +1,7 @@
-
 /**
- * Write a description of class Furgoneta here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * Representa un vehículo de tipo Furgoneta.
+ * @author Guillermo Bernal
+ * @version 10 de mayo de 2026
  */
 public class VehiculoFurgoneta extends Vehiculo
 {

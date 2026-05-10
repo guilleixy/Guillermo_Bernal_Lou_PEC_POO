@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=VehiculoFurgoneta
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Furgoneta\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Representa\ un\ veh\u00EDculo\ de\ tipo\ Furgoneta.\r\n\ @author\ Guillermo\ Bernal\r\n\ @version\ 10\ de\ mayo\ de\ 2026\r\n
 comment1.params=color\ numPlazas\ tara\ pesoMaximo
 comment1.target=VehiculoFurgoneta(java.lang.String,\ int,\ double,\ double)
 numComments=2

@@ -1,11 +1,8 @@
-
 /**
- * Write a description of interface VisualizadorDatos here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * Define las operaciones necesarias para la representación de datos del sistema.
+ * @author Guillermo Bernal
+ * @version 10 de mayo de 2026
  */
-
 public interface VisualizadorDatos
 {
     void imprimirEstadoSistema(String informacionAlmacen, String informacionCadenas);

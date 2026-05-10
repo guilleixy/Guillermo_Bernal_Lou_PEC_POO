@@ -1,9 +1,7 @@
-
 /**
- * Write a description of class MotorElectrico here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * Representa un motor de tipo eléctrico.
+ * @author Guillermo Bernal
+ * @version 10 de mayo de 2026
  */
 public class MotorElectrico extends Motor
 {

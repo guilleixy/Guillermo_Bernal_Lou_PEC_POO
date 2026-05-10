@@ -1,10 +1,10 @@
 import java.util.Date;
 
 /**
- * Write a description of class Trabajador here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * Clase abstracta que define los atributos comunes de todo el personal de la fábrica.
+ * Cumple con los requisitos de gestión de RRHH y nóminas.
+ * @author Guillermo Bernal
+ * @version 10 de mayo de 2026
  */
 public abstract class Trabajador
 {
@@ -35,4 +35,7 @@ public abstract class Trabajador
     public double obtenerSalario() { return salario; }
     public TrabajadorPuesto obtenerPuesto() { return puesto; }
     public Date obtenerFechaIngreso() { return fechaIngreso; }
+    
+    public void establecerDireccion(String direccion) { this.direccion = direccion; }
+    public void establecerSalario(double salario) { this.salario = salario; }
 }

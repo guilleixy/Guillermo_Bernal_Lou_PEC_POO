@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Almacen
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Almacen\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Implementaci\u00F3n\ del\ almac\u00E9n\ central\ de\ la\ f\u00E1brica.\r\n\ Gestiona\ el\ control\ de\ existencias\ de\ piezas\ y\ el\ registro\ de\ veh\u00EDculos\ producidos.\r\n\ @author\ Guillermo\ Bernal\r\n\ @version\ 10\ de\ mayo\ de\ 2026\r\n
 comment1.params=
 comment1.target=Almacen()
 comment2.params=v

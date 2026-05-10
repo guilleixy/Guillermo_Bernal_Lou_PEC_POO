@@ -1,10 +1,9 @@
 import java.util.Date;
 
 /**
- * Write a description of class TrabajadorOperario here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * Representa al personal responsable de la gestión de la planta.
+ * @author Guillermo Bernal
+ * @version 10 de mayo de 2026
  */
 public class TrabajadorGestorPlanta extends Trabajador
 {

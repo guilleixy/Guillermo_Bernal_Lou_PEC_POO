@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Dashboard
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Dashboard\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Clase\ de\ utilidad\ que\ act\u00FAa\ como\ punto\ central\ para\ la\ salida\ de\ informaci\u00F3n.\r\n\ @author\ Guillermo\ Bernal\r\n\ @version\ 10\ de\ mayo\ de\ 2026\r\n
 comment1.params=v
 comment1.target=void\ configurarVisualizador(VisualizadorDatos)
 comment2.params=infoAlmacen\ infoCadenas

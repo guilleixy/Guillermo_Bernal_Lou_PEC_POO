@@ -1,9 +1,7 @@
-
 /**
- * Write a description of class Turismo here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * Representa un vehículo de tipo Turismo.
+ * @author Guillermo Bernal
+ * @version 10 de mayo de 2026
  */
 public class VehiculoTurismo extends Vehiculo
 {

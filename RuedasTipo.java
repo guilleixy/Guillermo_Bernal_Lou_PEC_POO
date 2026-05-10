@@ -1,9 +1,7 @@
-
 /**
- * Enumeration class RuedasTipos - write a description of the enum class here
- * 
- * @author (your name here)
- * @version (version number or date here)
+ * Tipos de ruedas disponibles: normal, deportivo y todoterreno.
+ * @author Guillermo Bernal
+ * @version 10 de mayo de 2026
  */
 public enum RuedasTipo
 {

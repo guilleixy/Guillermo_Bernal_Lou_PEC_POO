@@ -1,9 +1,7 @@
-
 /**
- * Write a description of class Dashboard here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * Clase de utilidad que actúa como punto central para la salida de información.
+ * @author Guillermo Bernal
+ * @version 10 de mayo de 2026
  */
 public class Dashboard
 {

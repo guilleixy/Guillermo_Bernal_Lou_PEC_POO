@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=MotorElectrico
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ MotorElectrico\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Representa\ un\ motor\ de\ tipo\ el\u00E9ctrico.\r\n\ @author\ Guillermo\ Bernal\r\n\ @version\ 10\ de\ mayo\ de\ 2026\r\n
 comment1.params=cilindrada\ potencia\ numCilindros
 comment1.target=MotorElectrico(int,\ int,\ int)
 comment2.params=

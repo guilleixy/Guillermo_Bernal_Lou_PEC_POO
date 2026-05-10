@@ -1,8 +1,10 @@
 #BlueJ class context
 comment0.target=ComponenteVehiculo
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ ComponenteVehiculo\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Clase\ abstracta\ base\ que\ define\ la\ estructura\ com\u00FAn\ para\ todos\ los\ \r\n\ componentes\ que\ pueden\ ser\ ensamblados\ en\ un\ veh\u00EDculo\ dentro\ de\ la\ f\u00E1brica.\r\n\ @author\ Guillermo\ Bernal\r\n\ @version\ 10\ de\ mayo\ de\ 2026\r\n
 comment1.params=
 comment1.target=java.lang.String\ obtenerIdentificador()
+comment1.text=\r\n\ Devuelve\ una\ cadena\ de\ texto\ \u00FAnica\ que\ identifica\ de\ forma\ inequ\u00EDvoca\ \r\n\ al\ componente.\r\n\ @return\ Identificador\ \u00FAnico\ del\ componente.\r\n
 comment2.params=
 comment2.target=java.lang.String\ obtenerDatosTecnicos()
+comment2.text=\r\n\ Devuelve\ una\ representaci\u00F3n\ detallada\ de\ las\ especificaciones\ t\u00E9cnicas\ \r\n\ del\ componente\ (cilindrada,\ color,\ dimensiones,\ etc.).\r\n\ @return\ Cadena\ con\ los\ datos\ t\u00E9cnicos\ formateados.\r\n
 numComments=3

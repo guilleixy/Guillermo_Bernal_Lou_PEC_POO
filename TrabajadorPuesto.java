@@ -1,9 +1,7 @@
-
 /**
- * Enumeration class TrabajadorPuesto - write a description of the enum class here
- * 
- * @author (your name here)
- * @version (version number or date here)
+ * Roles de trabajadores disponibles.
+ * @author Guillermo Bernal
+ * @version 10 de mayo de 2026
  */
 public enum TrabajadorPuesto
 {

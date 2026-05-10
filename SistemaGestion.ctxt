@@ -1,6 +1,10 @@
 #BlueJ class context
 comment0.target=SistemaGestion
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ SistemaGestion\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-comment1.params=almacen\ rrhh
-comment1.target=SistemaGestion(IAlmacen,\ RecursosHumanos)
-numComments=2
+comment0.text=\r\n\ Controlador\ central\ del\ sistema\ de\ la\ f\u00E1brica.\ \r\n\ Coordina\ la\ log\u00EDstica\ del\ almac\u00E9n,\ la\ gesti\u00F3n\ de\ personal\ y\ la\ planificaci\u00F3n.\r\n\ @author\ Guillermo\ Bernal\r\n\ @version\ 10\ de\ mayo\ de\ 2026\r\n
+comment1.params=almacen\ rrhh\ dashboard\ planificador
+comment1.target=SistemaGestion(IAlmacen,\ RecursosHumanos,\ Dashboard,\ Planificador)
+comment2.params=
+comment2.target=IAlmacen\ obtenerAlmacen()
+comment3.params=
+comment3.target=RecursosHumanos\ obtenerRRHH()
+numComments=4

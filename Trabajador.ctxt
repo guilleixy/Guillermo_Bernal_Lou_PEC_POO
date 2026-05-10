@@ -1,8 +1,12 @@
 #BlueJ class context
 comment0.target=Trabajador
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Trabajador\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Clase\ abstracta\ que\ define\ los\ atributos\ comunes\ de\ todo\ el\ personal\ de\ la\ f\u00E1brica.\r\n\ Cumple\ con\ los\ requisitos\ de\ gesti\u00F3n\ de\ RRHH\ y\ n\u00F3minas.\r\n\ @author\ Guillermo\ Bernal\r\n\ @version\ 10\ de\ mayo\ de\ 2026\r\n
 comment1.params=dni\ nombre\ apellidos\ direccion\ numSeguridadSocial\ salario\ puesto\ fechaIngreso
 comment1.target=Trabajador(java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ int,\ double,\ TrabajadorPuesto,\ java.util.Date)
+comment10.params=direccion
+comment10.target=void\ establecerDireccion(java.lang.String)
+comment11.params=salario
+comment11.target=void\ establecerSalario(double)
 comment2.params=
 comment2.target=java.lang.String\ obtenerDni()
 comment3.params=
@@ -19,4 +23,4 @@ comment8.params=
 comment8.target=TrabajadorPuesto\ obtenerPuesto()
 comment9.params=
 comment9.target=java.util.Date\ obtenerFechaIngreso()
-numComments=10
+numComments=12

@@ -1,12 +1,17 @@
 #BlueJ class context
 comment0.target=RecursosHumanos
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ RecursosHumanos\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Gesti\u00F3n\ del\ personal\ de\ la\ f\u00E1brica.\ Permite\ el\ registro,\ b\u00FAsqueda\ y\ \r\n\ selecci\u00F3n\ de\ trabajadores\ para\ las\ diferentes\ tareas\ de\ producci\u00F3n.\r\n\ @author\ Guillermo\ Bernal\r\n\ @version\ 10\ de\ mayo\ de\ 2026\r\n
 comment1.params=
 comment1.target=RecursosHumanos()
 comment2.params=nuevoEmpleado
 comment2.target=void\ altaTrabajador(Trabajador)
+comment2.text=\r\n\ Registra\ un\ nuevo\ trabajador\ en\ el\ sistema.\r\n\ @param\ nuevoEmpleado\ Objeto\ trabajador\ a\ dar\ de\ alta.\r\n
 comment3.params=dni
 comment3.target=Trabajador\ buscarPorDni(java.lang.String)
+comment3.text=\r\n\ Localiza\ a\ un\ trabajador\ mediante\ su\ Documento\ Nacional\ de\ Identidad.\r\n\ @param\ dni\ Cadena\ de\ texto\ con\ el\ DNI\ a\ buscar.\r\n\ @return\ El\ trabajador\ encontrado\ o\ null\ si\ no\ existe.\r\n
 comment4.params=numeroOperarios
 comment4.target=TrabajadorOperario[]\ buscarOperariosAleatorios(int)
-numComments=5
+comment4.text=\r\n\ Selecciona\ un\ grupo\ de\ operarios\ de\ forma\ aleatoria\ para\ asignar\ a\ una\ fase\ de\ montaje.\r\n\ @param\ numeroOperarios\ Cantidad\ de\ operarios\ requeridos.\r\n\ @return\ Array\ con\ los\ operarios\ seleccionados.\r\n
+comment5.params=
+comment5.target=java.util.List\ obtenerEmpleados()
+numComments=6

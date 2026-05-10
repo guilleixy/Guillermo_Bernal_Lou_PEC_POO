@@ -1,4 +1,11 @@
 #BlueJ class context
 comment0.target=Planificador
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Planificador\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-numComments=1
+comment0.text=\r\n\ Clase\ responsable\ de\ la\ coordinaci\u00F3n\ temporal\ y\ operativa\ de\ la\ f\u00E1brica.\r\n\ Gestiona\ el\ avance\ de\ las\ l\u00EDneas\ de\ producci\u00F3n\ mediante\ un\ sistema\ de\ ticks\ (reloj).\r\n\ @author\ Guillermo\ Bernal\r\n\ @version\ 10\ de\ mayo\ de\ 2026\r\n
+comment1.params=cadenasMontaje\ rrhh
+comment1.target=Planificador(java.util.List,\ RecursosHumanos)
+comment2.params=
+comment2.target=void\ empezarSimulacionSimple()
+comment2.text=\r\n\ Inicia\ el\ ciclo\ de\ simulaci\u00F3n\ de\ la\ f\u00E1brica.\r\n\ El\ proceso\ contin\u00FAa\ hasta\ que\ todos\ los\ veh\u00EDculos\ en\ curso\ han\ sido\ finalizados.\r\n
+comment3.params=
+comment3.target=int\ obtenerReloj()
+numComments=4

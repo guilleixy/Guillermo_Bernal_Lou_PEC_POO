@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * Write a description of class Almacen here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * Implementación del almacén central de la fábrica.
+ * Gestiona el control de existencias de piezas y el registro de vehículos producidos.
+ * @author Guillermo Bernal
+ * @version 10 de mayo de 2026
  */
 public class Almacen implements IAlmacen
 {
@@ -82,16 +82,20 @@ public class Almacen implements IAlmacen
     
     @Override
     public String obtenerEstadoCompleto(){
-        String reporte = "--- ESTADO DEL ALMACÉN ---\n";
-        reporte += "COMPONENTES:\n";
+        StringBuilder reporte = new StringBuilder("--- ESTADO ACTUAL DEL ALMACÉN ---\n");
+        reporte.append("COMPONENTES EN STOCK:\n");
         
-        for (String clave : stockComponentes.keySet()) {
-            reporte += "- " + clave + ": " + stockComponentes.get(clave) + " unidades\n";
+        if (stockComponentes.isEmpty()) {
+            reporte.append("- Sin existencias registradas.\n");
+        } else {
+            for (Map.Entry<String, Integer> entrada : stockComponentes.entrySet()) {
+                reporte.append(String.format(" > %s: %d unidades\n", entrada.getKey(), entrada.getValue()));
+            }
         }
         
-        reporte += "VEHÍCULOS TERMINADOS: " + stockVehiculos.size() + "\n";
-        reporte += "--------------------------";
+        reporte.append("VEHÍCULOS TERMINADOS: ").append(stockVehiculos.size()).append("\n");
+        reporte.append("----------------------------------");
         
-        return reporte;
+        return reporte.toString();
     }
 }

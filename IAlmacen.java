@@ -1,11 +1,9 @@
-
 /**
- * Write a description of interface IAlmacen here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * Interfaz que define las operaciones de gestión de inventario tanto 
+ * para componentes individuales como para vehículos finalizados.
+ * @author Guillermo Bernal
+ * @version 10 de mayo de 2026
  */
-
 public interface IAlmacen
 {
     void añadirVehiculo(Vehiculo v);

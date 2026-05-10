@@ -1,9 +1,7 @@
-
 /**
- * Write a description of class MotorHibrido here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * Representa un motor de tipo híbrido.
+ * @author Guillermo Bernal
+ * @version 10 de mayo de 2026
  */
 public class MotorHibrido extends Motor
 {

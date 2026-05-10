@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=VisualizadorTerminal
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ VisualizadorTerminal\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Implementaci\u00F3n\ de\ la\ interfaz\ de\ visualizaci\u00F3n\ para\ salida\ por\ consola\ (System.out).\r\n\ @author\ Guillermo\ Bernal\r\n\ @version\ 10\ de\ mayo\ de\ 2026\r\n
 comment1.params=informacionAlmacen\ informacionCadenas
 comment1.target=void\ imprimirEstadoSistema(java.lang.String,\ java.lang.String)
 comment2.params=mensaje
