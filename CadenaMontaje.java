@@ -7,27 +7,22 @@
  */
 public class CadenaMontaje
 {
-    // instance variables - replace the example below with your own
-    private int x;
-
-    /**
-     * Constructor for objects of class CadenaMontaje
-     */
-    public CadenaMontaje()
-    {
-        // initialise instance variables
-        x = 0;
+    private String identificadorCadena;
+    private TrabajadorOperario[] operarios;
+    private int estadoActual;
+    
+    public CadenaMontaje(String id) {
+        this.identificadorCadena = id;
+        this.operarios = new TrabajadorOperario[4];
+        this.estadoActual = 0;
     }
-
-    /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
+    
+    public void asignarOperarios(TrabajadorOperario[] nuevosOperarios) {
+        if(nuevosOperarios.length == 4){
+            this.operarios = nuevosOperarios;
+            Dashboard.mostrarMensaje("Operarios de la cadena " + identificadorCadena + " asignados.");
+        } else {
+            Dashboard.mostrarError("La cadena " + identificadorCadena + " requiere exactamente 4 operarios.");
+        }
     }
 }

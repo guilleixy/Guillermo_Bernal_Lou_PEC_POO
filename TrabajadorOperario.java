@@ -12,7 +12,7 @@ public class TrabajadorOperario extends Trabajador
     private TrabajadorNivelProductividad nivel;
     private final int montajesNecesarios = 10;
     
-    public TrabajadorOperario(String dni, String nombre, String apellidos, String direccion, int numSeguridadSocial, double salario, String puesto, Date fechaIngreso, TrabajadorNivelProductividad nivelInicial){
+    public TrabajadorOperario(String dni, String nombre, String apellidos, String direccion, int numSeguridadSocial, double salario, TrabajadorPuesto puesto, Date fechaIngreso, TrabajadorNivelProductividad nivelInicial){
         super(dni, nombre, apellidos, direccion, numSeguridadSocial, salario, puesto, fechaIngreso);
         this.numeroMontajes = 0;
         this.nivel = nivelInicial;

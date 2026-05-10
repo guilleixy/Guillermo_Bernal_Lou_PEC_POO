@@ -12,7 +12,7 @@ public class TrabajadorMecanicoCinta extends Trabajador
     private TrabajadorNivelProductividad nivel;
     private final int reparacionesNecesarias = 20;
     
-    public TrabajadorMecanicoCinta(String dni, String nombre, String apellidos, String direccion, int numSeguridadSocial, double salario, String puesto, Date fechaIngreso, TrabajadorNivelProductividad nivelInicial){
+    public TrabajadorMecanicoCinta(String dni, String nombre, String apellidos, String direccion, int numSeguridadSocial, double salario, TrabajadorPuesto puesto, Date fechaIngreso, TrabajadorNivelProductividad nivelInicial){
         super(dni, nombre, apellidos, direccion, numSeguridadSocial, salario, puesto, fechaIngreso);
         this.numeroReparaciones = 0;
         this.nivel = nivelInicial;

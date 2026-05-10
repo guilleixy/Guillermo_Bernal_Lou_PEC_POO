@@ -12,11 +12,11 @@ public interface IAlmacen
     void actualizarVehiculo(Vehiculo v);
     Vehiculo obtenerStockVehiculo(String tipo);
     
-    boolean hayPiezasSuficientes();
+    boolean hayPiezasSuficientes(String tipoComponente);
         
     int obtenerStockComponente(String tipoComponente);
     void añadirStockComponente(ComponenteVehiculo c, int cantidad);
     void quitarStockComponente(ComponenteVehiculo c, int cantidad);
     
-    
+    String obtenerEstadoCompleto();
 }

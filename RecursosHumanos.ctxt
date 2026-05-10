@@ -7,4 +7,6 @@ comment2.params=nuevoEmpleado
 comment2.target=void\ altaTrabajador(Trabajador)
 comment3.params=dni
 comment3.target=Trabajador\ buscarPorDni(java.lang.String)
-numComments=4
+comment4.params=numeroOperarios
+comment4.target=TrabajadorOperario[]\ buscarOperariosAleatorios(int)
+numComments=5

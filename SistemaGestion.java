@@ -9,11 +9,15 @@ public class SistemaGestion {
     private IAlmacen almacen;
     private RecursosHumanos rrhh;
     private Dashboard dashboard;
+    private Planificador planificador;
+    private final int operariosPorCadena = ComponenteTipo.values().length;;
     
-    public SistemaGestion(IAlmacen almacen, RecursosHumanos rrhh) {
+    public SistemaGestion(IAlmacen almacen, RecursosHumanos rrhh, Dashboard dashboard, Planificador planificador) {
         this.almacen = almacen;
         this.rrhh = rrhh;
-        Dashboard.configurarVisualizador(new VisualizadorTerminal());
+        this.dashboard = dashboard;
+        this.planificador = planificador;
+        dashboard.configurarVisualizador(new VisualizadorTerminal());
     }
     
 

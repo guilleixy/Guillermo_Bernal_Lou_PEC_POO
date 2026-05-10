@@ -1,4 +1,22 @@
 #BlueJ class context
 comment0.target=Almacen
 comment0.text=\r\n\ Write\ a\ description\ of\ class\ Almacen\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-numComments=1
+comment1.params=
+comment1.target=Almacen()
+comment2.params=v
+comment2.target=void\ a\u00F1adirVehiculo(Vehiculo)
+comment3.params=v
+comment3.target=void\ actualizarVehiculo(Vehiculo)
+comment4.params=tipo
+comment4.target=Vehiculo\ obtenerStockVehiculo(java.lang.String)
+comment5.params=tipoComponente
+comment5.target=boolean\ hayPiezasSuficientes(java.lang.String)
+comment6.params=identificadorComponente
+comment6.target=int\ obtenerStockComponente(java.lang.String)
+comment7.params=c\ cantidad
+comment7.target=void\ a\u00F1adirStockComponente(ComponenteVehiculo,\ int)
+comment8.params=c\ cantidad
+comment8.target=void\ quitarStockComponente(ComponenteVehiculo,\ int)
+comment9.params=
+comment9.target=java.lang.String\ obtenerEstadoCompleto()
+numComments=10

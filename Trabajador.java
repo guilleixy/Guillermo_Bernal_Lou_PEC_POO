@@ -14,10 +14,10 @@ public abstract class Trabajador
     private String direccion;
     private int numSeguridadSocial;
     private double salario;
-    private String puesto;
+    private TrabajadorPuesto puesto;
     private Date fechaIngreso;
         
-    public Trabajador(String dni, String nombre, String apellidos, String direccion, int numSeguridadSocial, double salario, String puesto, Date fechaIngreso){
+    public Trabajador(String dni, String nombre, String apellidos, String direccion, int numSeguridadSocial, double salario, TrabajadorPuesto puesto, Date fechaIngreso){
         this.dni = dni;
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -33,6 +33,6 @@ public abstract class Trabajador
     public String obtenerDireccion() { return direccion; }
     public int obtenerNumSeguridadSocial() { return numSeguridadSocial; }
     public double obtenerSalario() { return salario; }
-    public String obtenerPuesto() { return puesto; }
+    public TrabajadorPuesto obtenerPuesto() { return puesto; }
     public Date obtenerFechaIngreso() { return fechaIngreso; }
 }

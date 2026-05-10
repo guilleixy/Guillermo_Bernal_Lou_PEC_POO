@@ -1,3 +1,4 @@
+import java.util.List;
 
 /**
  * Write a description of class vehiculo here.
@@ -12,6 +13,7 @@ public abstract class Vehiculo
     private double tara;
     private double pesoMaximo;
     private String tipo;
+    private List<ComponenteTipo> componentesInstalados;
     
     public Vehiculo(String color, int numPlazas, double tara, double pesoMaximo, String tipo){
         this.color = color;
@@ -20,6 +22,11 @@ public abstract class Vehiculo
         this.pesoMaximo = pesoMaximo;
         this.tipo = tipo;
     }
+    
+    public boolean estaTerminado(){
+        return componentesInstalados.size() == ComponenteTipo.values().length;
+    }
+    
     public String obtenerTipo(){
         return tipo;
     }

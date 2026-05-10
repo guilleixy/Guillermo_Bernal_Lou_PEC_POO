@@ -8,7 +8,7 @@ import java.util.Date;
  */
 public class TrabajadorGestorPlanta extends Trabajador
 {
-    public TrabajadorGestorPlanta(String dni, String nombre, String apellidos, String direccion, int numSeguridadSocial, double salario, String puesto, Date fechaIngreso){
+    public TrabajadorGestorPlanta(String dni, String nombre, String apellidos, String direccion, int numSeguridadSocial, double salario, TrabajadorPuesto puesto, Date fechaIngreso){
         super(dni, nombre, apellidos, direccion, numSeguridadSocial, salario, puesto, fechaIngreso);
     }
 }

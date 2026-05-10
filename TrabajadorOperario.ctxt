@@ -2,7 +2,7 @@
 comment0.target=TrabajadorOperario
 comment0.text=\r\n\ Write\ a\ description\ of\ class\ TrabajadorOperario\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=dni\ nombre\ apellidos\ direccion\ numSeguridadSocial\ salario\ puesto\ fechaIngreso\ nivelInicial
-comment1.target=TrabajadorOperario(java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ int,\ double,\ java.lang.String,\ java.util.Date,\ TrabajadorNivelProductividad)
+comment1.target=TrabajadorOperario(java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ int,\ double,\ TrabajadorPuesto,\ java.util.Date,\ TrabajadorNivelProductividad)
 comment2.params=
 comment2.target=void\ registrarMontaje()
 comment3.params=

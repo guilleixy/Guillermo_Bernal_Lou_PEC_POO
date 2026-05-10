@@ -1,5 +1,6 @@
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Write a description of class RecursosHumanos here.
@@ -28,5 +29,20 @@ public class RecursosHumanos
             }
         }
         return null;
+    }
+    
+    public TrabajadorOperario[] buscarOperariosAleatorios(int numeroOperarios){
+        List<TrabajadorOperario> totalOperarios = new ArrayList<>();
+        for (Trabajador t : empleados) {
+            if(t.obtenerPuesto() == TrabajadorPuesto.OPERARIO){
+                totalOperarios.add((TrabajadorOperario) t);
+            }
+        }
+        Collections.shuffle(totalOperarios);
+        TrabajadorOperario[] operariosSeleccionados = new TrabajadorOperario[4];
+        for(int i = 0; i < numeroOperarios; i++) {
+            operariosSeleccionados[i] = totalOperarios.get(i);
+        }
+        return operariosSeleccionados;
     }
 }
