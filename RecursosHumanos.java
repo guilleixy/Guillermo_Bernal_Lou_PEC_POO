@@ -41,6 +41,21 @@ public class RecursosHumanos
         return null;
     }
     
+    /**
+     * Busca y devuelve el primer trabajador que coincida con el puesto solicitado.
+     * @param puesto El tipo de trabajador buscado (ADMINISTRADOR_SISTEMAS, GESTOR_PLANTA, etc.)
+     * @return El objeto Trabajador encontrado o null si no existe en la plantilla.
+     */
+    public Trabajador buscarTrabajadorPorPuesto(TrabajadorPuesto puesto) {
+        for (Trabajador t : empleados) {
+            if (t.obtenerPuesto() == puesto) {
+                return t;
+            }
+        }
+        
+        Dashboard.mostrarError("Recursos Humanos: No se ha encontrado personal con el puesto: " + puesto);
+        return null;
+    }
     
     /**
      * Selecciona un grupo de operarios de forma aleatoria para asignar a una fase de montaje.

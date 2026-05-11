@@ -10,6 +10,7 @@ public class CadenaMontaje
     private TrabajadorOperario[] operarios;
     private int estadoActual; // 0: Espera, 1: Chasis, 2: Motor, 3: Tapicería, 4: Ruedas
     private Vehiculo vehiculoEnCurso;
+    private boolean averiada = false;
     
     public CadenaMontaje(String id) {
         this.identificadorCadena = id;
@@ -66,9 +67,15 @@ public class CadenaMontaje
         }
     }
 
-    public String obtenerIdentificadorCadena() { return identificadorCadena; }
-    public int obtenerEstadoActual() { return estadoActual; }
-    public Vehiculo obtenerVehiculoEnCurso() { return vehiculoEnCurso; }
+    public void provocarAveria() { 
+        this.averiada = true; 
+        Dashboard.mostrarError("¡AVERÍA CRÍTICA en " + identificadorCadena + "!");
+    }
+    
+    public void reparar() { 
+        this.averiada = false; 
+        Dashboard.mostrarMensaje("Reparación completada en " + identificadorCadena);
+    }
     
     /**
      * Verifica si el vehículo actual ha pasado por todas las fases.
@@ -77,4 +84,17 @@ public class CadenaMontaje
     public boolean estaTrabajoFinalizado() {
         return vehiculoEnCurso != null && vehiculoEnCurso.estaTerminado();
     }
+    
+    public void liberarCadena() {
+        TrabajadorOperario[] personalALiberar = this.operarios;
+        this.vehiculoEnCurso = null;
+        this.estadoActual = 0;
+        this.operarios = new TrabajadorOperario[4];
+
+    }
+    
+    public boolean estaAveriada() { return averiada; }
+    public String obtenerIdentificadorCadena() { return identificadorCadena; }
+    public int obtenerEstadoActual() { return estadoActual; }
+    public Vehiculo obtenerVehiculoEnCurso() { return vehiculoEnCurso; }
 }
