@@ -1,6 +1,7 @@
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Set;
 
 /**
  * Gestión del personal de la fábrica. Permite el registro, búsqueda y 
@@ -78,12 +79,34 @@ public class RecursosHumanos
         // Ajustamos el número dependiendo de la disponibilidad real de operarios
         int cantidadARetornar = Math.min(numeroOperarios, totalOperarios.size());
         TrabajadorOperario[] operariosSeleccionados = new TrabajadorOperario[cantidadARetornar];
-        for(int i = 0; i < numeroOperarios; i++) {
+        for(int i = 0; i < cantidadARetornar; i++) {
             operariosSeleccionados[i] = totalOperarios.get(i);
         }
         return operariosSeleccionados;
     }
     
+    /**
+     * Selecciona operarios libres (no presentes en el conjunto de excluidos) de forma aleatoria.
+     * @param cantidad  Número de operarios necesarios.
+     * @param ocupados  Conjunto de operarios ya asignados a otras cadenas.
+     * @return Array con los operarios disponibles seleccionados.
+     */
+    public TrabajadorOperario[] buscarOperariosDisponibles(int cantidad, Set<TrabajadorOperario> ocupados) {
+        List<TrabajadorOperario> disponibles = new ArrayList<>();
+        for (Trabajador t : empleados) {
+            if (t.obtenerPuesto() == TrabajadorPuesto.OPERARIO && !ocupados.contains(t)) {
+                disponibles.add((TrabajadorOperario) t);
+            }
+        }
+        Collections.shuffle(disponibles);
+        int cantidadARetornar = Math.min(cantidad, disponibles.size());
+        TrabajadorOperario[] resultado = new TrabajadorOperario[cantidadARetornar];
+        for (int i = 0; i < cantidadARetornar; i++) {
+            resultado[i] = disponibles.get(i);
+        }
+        return resultado;
+    }
+
     public List<Trabajador> obtenerEmpleados() {
         return empleados;
     }

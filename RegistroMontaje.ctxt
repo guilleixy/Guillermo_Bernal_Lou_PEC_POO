@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.target=RegistroMontaje
+comment0.text=\r\n\ Representa\ un\ evento\ de\ instalaci\u00F3n\ de\ un\ componente\ durante\ el\ proceso\ de\ ensamblaje.\r\n\ Permite\ consultar\ el\ historial\ de\ producci\u00F3n\ filtrado\ por\ fecha.\r\n\ @author\ Guillermo\ Bernal\r\n\ @version\ 10\ de\ mayo\ de\ 2026\r\n
+comment1.params=fecha\ componente\ tipoVehiculo\ identificadorCadena
+comment1.target=RegistroMontaje(java.util.Date,\ ComponenteTipo,\ java.lang.String,\ java.lang.String)
+comment2.params=
+comment2.target=java.util.Date\ obtenerFecha()
+comment3.params=
+comment3.target=ComponenteTipo\ obtenerComponente()
+comment4.params=
+comment4.target=java.lang.String\ obtenerTipoVehiculo()
+comment5.params=
+comment5.target=java.lang.String\ obtenerIdentificadorCadena()
+comment6.params=
+comment6.target=java.lang.String\ toString()
+numComments=7

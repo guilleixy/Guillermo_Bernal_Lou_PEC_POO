@@ -1,9 +1,8 @@
 #BlueJ class context
 comment0.target=Chasis
 comment0.text=\r\n\ Representa\ el\ chasis\ de\ un\ veh\u00EDculo,\ siendo\ el\ componente\ base\ \r\n\ sobre\ el\ que\ se\ inicia\ el\ proceso\ de\ ensamblaje\ en\ la\ f\u00E1brica.\r\n\ @author\ Guillermo\ Bernal\r\n\ @version\ 10\ de\ mayo\ de\ 2026\r\n
-comment1.params=material
-comment1.target=Chasis(java.lang.String)
-comment1.text=\r\n\ Constructor\ para\ la\ clase\ Chasis.\r\n
+comment1.params=
+comment1.target=Chasis()
 comment2.params=
 comment2.target=java.lang.String\ obtenerDatosTecnicos()
 comment3.params=

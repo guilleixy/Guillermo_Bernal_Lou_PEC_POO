@@ -6,12 +6,7 @@
  */
 public class Chasis extends ComponenteVehiculo
 {
-    private String material;
-
-    /**
-     * Constructor para la clase Chasis.
-     */
-    public Chasis(String material) {
+    public Chasis() {
     }
 
     @Override

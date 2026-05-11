@@ -1,8 +1,14 @@
 #BlueJ class context
 comment0.target=IAlmacen
-comment0.text=\r\n\ Interfaz\ que\ define\ las\ operaciones\ de\ gesti\u00F3n\ de\ inventario\ tanto\ \r\n\ para\ componentes\ individuales\ como\ para\ veh\u00EDculos\ finalizados.\r\n\ @author\ Guillermo\ Bernal\r\n\ @version\ 10\ de\ mayo\ de\ 2026\r\n
+comment0.text=\r\n\ Interfaz\ que\ define\ las\ operaciones\ de\ gesti\u00F3n\ de\ inventario\ tanto\r\n\ para\ componentes\ individuales\ como\ para\ veh\u00EDculos\ finalizados.\r\n\ @author\ Guillermo\ Bernal\r\n\ @version\ 10\ de\ mayo\ de\ 2026\r\n
 comment1.params=v
 comment1.target=void\ a\u00F1adirVehiculo(Vehiculo)
+comment10.params=registro
+comment10.target=void\ registrarMontaje(RegistroMontaje)
+comment11.params=desde\ hasta
+comment11.target=java.util.List\ consultarHistorialPorFecha(java.util.Date,\ java.util.Date)
+comment12.params=
+comment12.target=java.util.List\ obtenerVehiculosTerminados()
 comment2.params=v
 comment2.target=void\ actualizarVehiculo(Vehiculo)
 comment3.params=tipo
@@ -15,6 +21,8 @@ comment6.params=c\ cantidad
 comment6.target=void\ a\u00F1adirStockComponente(ComponenteVehiculo,\ int)
 comment7.params=c\ cantidad
 comment7.target=void\ quitarStockComponente(ComponenteVehiculo,\ int)
-comment8.params=
-comment8.target=java.lang.String\ obtenerEstadoCompleto()
-numComments=9
+comment8.params=identificador\ cantidad
+comment8.target=void\ quitarStockComponente(java.lang.String,\ int)
+comment9.params=
+comment9.target=java.lang.String\ obtenerEstadoCompleto()
+numComments=13

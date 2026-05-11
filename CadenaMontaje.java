@@ -11,6 +11,9 @@ public class CadenaMontaje
     private int estadoActual; // 0: Espera, 1: Chasis, 2: Motor, 3: Tapicería, 4: Ruedas
     private Vehiculo vehiculoEnCurso;
     private boolean averiada = false;
+    private int ticksEnFaseActual = 0;
+    private int ticksPendientesReparacion = 0;
+    private TrabajadorMecanicoCinta mecanicoAsignado = null;
     
     public CadenaMontaje(String id) {
         this.identificadorCadena = id;
@@ -41,7 +44,8 @@ public class CadenaMontaje
             return;
         }
         this.vehiculoEnCurso = v;
-        this.estadoActual = 1; // Comenzamos con el Chasis
+        this.estadoActual = 1;
+        this.ticksEnFaseActual = 0;
         Dashboard.mostrarMensaje("Iniciado montaje de " + v.obtenerTipo() + " en " + identificadorCadena);
     }
 
@@ -49,31 +53,83 @@ public class CadenaMontaje
      * Avanza el vehículo a la siguiente fase de montaje e incrementa la 
      * experiencia de los operarios asignados.
      */
-    public void avanzarFase() {
-        if (vehiculoEnCurso == null) return;
+    /**
+     * Avanza un tick en la fase actual.
+     * @return El ComponenteTipo completado en este tick, o null si la fase sigue en curso.
+     */
+    public ComponenteTipo avanzarFase() {
+        if (vehiculoEnCurso == null) return null;
 
         ComponenteTipo[] fases = ComponenteTipo.values();
         if (estadoActual <= fases.length) {
-            ComponenteTipo faseCompletada = fases[estadoActual - 1];
-            vehiculoEnCurso.instalarComponente(faseCompletada);
-            
-            // Incrementar estadísticas de los operarios por el trabajo realizado
-            for (TrabajadorOperario op : operarios) {
-                if (op != null) op.registrarMontaje();
-            }
+            TrabajadorOperario operarioActual = operarios[estadoActual - 1];
+            // Eficiente: 1 tick. Estándar: 3 ticks (enunciado sec. 3a)
+            int ticksNecesarios = (operarioActual != null &&
+                operarioActual.obtenerNivel() == TrabajadorNivelProductividad.EFICIENTE) ? 1 : 3;
 
-            Dashboard.mostrarMensaje(identificadorCadena + ": Fase " + faseCompletada + " completada.");
-            estadoActual++;
+            ticksEnFaseActual++;
+
+            if (ticksEnFaseActual >= ticksNecesarios) {
+                ComponenteTipo faseCompletada = fases[estadoActual - 1];
+                vehiculoEnCurso.instalarComponente(faseCompletada);
+
+                for (TrabajadorOperario op : operarios) {
+                    if (op != null) op.registrarMontaje();
+                }
+
+                Dashboard.mostrarMensaje(identificadorCadena + ": Fase " + faseCompletada + " completada.");
+                estadoActual++;
+                ticksEnFaseActual = 0;
+                return faseCompletada;
+            } else {
+                Dashboard.mostrarMensaje(identificadorCadena + ": Fase " + fases[estadoActual - 1] +
+                    " en progreso (" + ticksEnFaseActual + "/" + ticksNecesarios + " ticks)");
+            }
         }
+        return null;
     }
 
-    public void provocarAveria() { 
-        this.averiada = true; 
+    public void provocarAveria() {
+        this.averiada = true;
+        this.ticksPendientesReparacion = 0;
+        this.mecanicoAsignado = null;
         Dashboard.mostrarError("¡AVERÍA CRÍTICA en " + identificadorCadena + "!");
     }
-    
-    public void reparar() { 
-        this.averiada = false; 
+
+    /**
+     * Inicia una reparación con tiempo variable según el nivel del mecánico.
+     * @param mecanico  Mecánico asignado a la reparación.
+     * @param ticks     Ticks necesarios para completar la reparación.
+     */
+    public void iniciarReparacion(TrabajadorMecanicoCinta mecanico, int ticks) {
+        this.mecanicoAsignado = mecanico;
+        this.ticksPendientesReparacion = ticks;
+        Dashboard.mostrarMensaje(identificadorCadena + ": Reparación en curso (" + ticks + " ticks).");
+    }
+
+    /**
+     * Procesa un tick de reparación. Cuando los ticks llegan a 0 completa la reparación.
+     * @return true si la reparación ha finalizado en este tick.
+     */
+    public boolean procesarTickReparacion() {
+        if (!averiada || ticksPendientesReparacion <= 0) return false;
+        ticksPendientesReparacion--;
+        if (ticksPendientesReparacion == 0) {
+            averiada = false;
+            if (mecanicoAsignado != null) {
+                mecanicoAsignado.registrarReparacion();
+                mecanicoAsignado = null;
+            }
+            Dashboard.mostrarMensaje("Reparación completada en " + identificadorCadena);
+            return true;
+        }
+        return false;
+    }
+
+    public void reparar() {
+        this.averiada = false;
+        this.ticksPendientesReparacion = 0;
+        this.mecanicoAsignado = null;
         Dashboard.mostrarMensaje("Reparación completada en " + identificadorCadena);
     }
     
@@ -86,15 +142,18 @@ public class CadenaMontaje
     }
     
     public void liberarCadena() {
-        TrabajadorOperario[] personalALiberar = this.operarios;
         this.vehiculoEnCurso = null;
         this.estadoActual = 0;
+        this.ticksEnFaseActual = 0;
+        this.ticksPendientesReparacion = 0;
+        this.mecanicoAsignado = null;
         this.operarios = new TrabajadorOperario[4];
-
     }
     
     public boolean estaAveriada() { return averiada; }
+    public int obtenerTicksPendientesReparacion() { return ticksPendientesReparacion; }
     public String obtenerIdentificadorCadena() { return identificadorCadena; }
     public int obtenerEstadoActual() { return estadoActual; }
     public Vehiculo obtenerVehiculoEnCurso() { return vehiculoEnCurso; }
+    public TrabajadorOperario[] obtenerOperarios() { return operarios; }
 }

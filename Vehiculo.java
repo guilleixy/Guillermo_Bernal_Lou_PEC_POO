@@ -55,5 +55,6 @@ public abstract class Vehiculo
     public double obtenerPesoMaximo() { return pesoMaximo; }
     public void establecerPesoMaximo(double pesoMaximo) { this.pesoMaximo = pesoMaximo; }
 
-    public String obtenerTipo(){ return tipo; } 
+    public String obtenerTipo(){ return tipo; }
+    public List<ComponenteTipo> obtenerComponentesInstalados() { return componentesInstalados; }
 }

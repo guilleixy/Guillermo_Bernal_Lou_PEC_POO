@@ -1,4 +1,3 @@
-
 /**
  * Clase que representa la tapicería de un vehículo dentro del sistema de la fábrica.
  * Almacena información sobre el material, color y cantidad de tela utilizada.
@@ -35,6 +34,7 @@ public class Tapiceria extends ComponenteVehiculo
     }
     public void establecerColor(String color) { this.color = color; }
     public void establecerMaterial(TapiceriaTipoMaterial material) { this.material = material; }
+    
     
     @Override
     public String obtenerDatosTecnicos(){

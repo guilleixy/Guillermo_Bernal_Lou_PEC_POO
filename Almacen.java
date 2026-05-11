@@ -2,6 +2,7 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Implementación del almacén central de la fábrica.
@@ -13,10 +14,12 @@ public class Almacen implements IAlmacen
 {
     private Map<String, Integer> stockComponentes;
     private List<Vehiculo> stockVehiculos;
+    private List<RegistroMontaje> historialMontaje;
     
     public Almacen() {
         this.stockComponentes = new HashMap<>();
         this.stockVehiculos = new ArrayList<>();
+        this.historialMontaje = new ArrayList<>();
     }
     
     @Override
@@ -70,16 +73,41 @@ public class Almacen implements IAlmacen
     
     @Override
     public void quitarStockComponente(ComponenteVehiculo c, int cantidad){
-        String clave = c.obtenerIdentificador(); 
-        int stockActual = obtenerStockComponente(clave);
+        quitarStockComponente(c.obtenerIdentificador(), cantidad);
+    }
+
+    @Override
+    public void quitarStockComponente(String identificador, int cantidad){
+        int stockActual = obtenerStockComponente(identificador);
         if(stockActual >= cantidad){
-            stockComponentes.put(clave, stockActual - cantidad);  
-            Dashboard.mostrarMensaje("Almacén: Stock dismiunido. " + clave + ": " + stockComponentes.get(clave));
+            stockComponentes.put(identificador, stockActual - cantidad);
+            Dashboard.mostrarMensaje("Almacén: Stock disminuido. " + identificador + ": " + stockComponentes.get(identificador));
         } else {
-            Dashboard.mostrarError("STOCK INSUFICIENTE de " + clave + ". Se requieren " + cantidad + " y solo hay " + stockActual);
+            Dashboard.mostrarError("STOCK INSUFICIENTE de " + identificador + ". Se requieren " + cantidad + " y solo hay " + stockActual);
         }
     }
     
+    @Override
+    public List<Vehiculo> obtenerVehiculosTerminados() {
+        return new ArrayList<>(stockVehiculos);
+    }
+
+    @Override
+    public void registrarMontaje(RegistroMontaje registro) {
+        historialMontaje.add(registro);
+    }
+
+    @Override
+    public List<RegistroMontaje> consultarHistorialPorFecha(Date desde, Date hasta) {
+        List<RegistroMontaje> resultado = new ArrayList<>();
+        for (RegistroMontaje r : historialMontaje) {
+            if (!r.obtenerFecha().before(desde) && !r.obtenerFecha().after(hasta)) {
+                resultado.add(r);
+            }
+        }
+        return resultado;
+    }
+
     @Override
     public String obtenerEstadoCompleto(){
         StringBuilder reporte = new StringBuilder("--- ESTADO ACTUAL DEL ALMACÉN ---\n");
