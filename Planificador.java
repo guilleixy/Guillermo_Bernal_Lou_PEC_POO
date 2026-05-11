@@ -1,4 +1,6 @@
 import java.util.List;
+import java.util.Queue;
+import java.util.LinkedList;
 
 /**
  * Clase responsable de la coordinación temporal y operativa de la fábrica.
@@ -11,20 +13,45 @@ public class Planificador
     private int reloj;
     private List<CadenaMontaje> cadenasMontaje;
     private RecursosHumanos rrhh;
+    private IAlmacen almacen;
+    private Queue<Vehiculo> colaProduccion;
     
-    public Planificador(List<CadenaMontaje> cadenasMontaje, RecursosHumanos rrhh){
+    public Planificador(List<CadenaMontaje> cadenasMontaje, RecursosHumanos rrhh, IAlmacen almacen){
         this.cadenasMontaje = cadenasMontaje;
         this.rrhh = rrhh;
+        this.almacen = almacen;
+        this.colaProduccion = new LinkedList<>();
         this.reloj = 0;
+    }
+    
+    /**
+     * Añade un vehículo a la espera de ser fabricado.
+     */
+    public void añadirPedido(Vehiculo v) {
+        colaProduccion.add(v);
+        Dashboard.mostrarMensaje("Nuevo pedido en cola: " + v.obtenerTipo());
+    }
+    
+    private void gestionarAsignaciones() {
+        for (CadenaMontaje cadena : cadenasMontaje) {
+            if (cadena.obtenerVehiculoEnCurso() == null && !colaProduccion.isEmpty()) {
+                // Buscamos operarios disponibles
+                TrabajadorOperario[] equipo = rrhh.buscarOperariosAleatorios(4);
+                if (equipo.length == 4) {
+                    Vehiculo v = colaProduccion.poll();
+                    cadena.asignarOperarios(equipo);
+                    cadena.iniciarMontaje(v);
+                }
+            }
+        }
     }
     
     /**
      * Inicia el ciclo de simulación de la fábrica.
      * El proceso continúa hasta que todos los vehículos en curso han sido finalizados.
      */
-    public void empezarSimulacionSimple(){
-        Dashboard.mostrarMensaje("Iniciando ciclo de producción...");
-        
+    public void empezarSimulacionSimple(SimulacionModo modo){
+        Dashboard.mostrarMensaje("Iniciando simulación en modo: " + modo);
         boolean trabajoPendiente = true;
         
         while(trabajoPendiente){
@@ -34,26 +61,77 @@ public class Planificador
             for(CadenaMontaje cadena : cadenasMontaje){
                 // Si la cadena tiene un vehículo y no ha terminado todas las fases
                 if (cadena.obtenerVehiculoEnCurso() != null && !cadena.estaTrabajoFinalizado()) {
-                    cadena.avanzarFase();
+                    switch (modo) {
+                        case SIMPLE:
+                            ejecutarPasoSimple(cadena);
+                            break;
+                        case COMPLEJA:
+                            ejecutarPasoComplejo(cadena);
+                            break;
+                        case MUY_COMPLEJA:
+                            ejecutarPasoMuyComplejo(cadena);
+                            break;
+                    }
                     trabajoPendiente = true;
                 }
                 
-                // Si la cadena acaba de terminar el trabajo en este tick
-                if (cadena.estaTrabajoFinalizado()) {
-                    Dashboard.mostrarMensaje("Vehículo completado en " + cadena.obtenerIdentificadorCadena() + 
-                                             " en el tiempo: " + reloj);
-                }
-            }
-            
-            // Limitador de seguridad para evitar bucles infinitos en la simulación
-            if (reloj > 1000) {
-                Dashboard.mostrarError("Simulación interrumpida: Tiempo límite excedido.");
-                break;
             }
         }
         
         Dashboard.mostrarMensaje("Simulación finalizada. Tiempo total: " + reloj + " unidades.");
     }
 
+    
+    private void ejecutarPasoSimple(CadenaMontaje cadena) {
+        cadena.avanzarFase();
+    }
+    
+    
+    private void ejecutarPasoComplejo(CadenaMontaje cadena) {
+        // En modo complejo, verificamos stock antes de cada fase
+        ComponenteTipo siguientePieza = ComponenteTipo.values()[cadena.obtenerEstadoActual() - 1];
+        ComponenteVehiculo pieza = determinarPiezaParaFase(siguientePieza, cadena.obtenerVehiculoEnCurso());
+        // Simulamos la búsqueda de una pieza específica en el almacén
+        if (almacen.hayPiezasSuficientes(siguientePieza.toString())) {
+            cadena.avanzarFase();
+            almacen.quitarStockComponente(pieza, 1);
+        } else {
+            Dashboard.mostrarError("Cadena " + cadena.obtenerIdentificadorCadena() + " parada por falta de: " + siguientePieza);
+        }
+    }
+    
+    private void ejecutarPasoMuyComplejo(CadenaMontaje cadena) {
+        if (cadena.estaAveriada()) {
+            // 1. Localizamos al Gestor de Planta a través de RRHH
+            Trabajador t = rrhh.buscarTrabajadorPorPuesto(TrabajadorPuesto.GESTOR_PLANTA);
+            
+            if (t instanceof TrabajadorGestorPlanta) {
+                TrabajadorGestorPlanta gestor = (TrabajadorGestorPlanta) t;
+                TrabajadorMecanicoCinta mecanico = gestor.llamarMecanico(rrhh);
+                
+                if (mecanico != null) {
+                    cadena.reparar();
+                    mecanico.registrarReparacion();
+                    Dashboard.mostrarMensaje("Acción de Gestión: El mecánico " + mecanico.obtenerNombre() + 
+                                             " ha reparado la cadena bajo supervisión de " + gestor.obtenerNombre());
+                } else {
+                    Dashboard.mostrarError("Gestión: " + gestor.obtenerNombre() + 
+                                           " informa que no hay mecánicos disponibles.");
+                }
+            } else {
+                Dashboard.mostrarError("CRÍTICO: No hay Gestor de Planta para supervisar la avería.");
+            }
+            return; // El turno se consume en la gestión/reparación
+        }
+        
+        if (Math.random() < 0.10) {
+            Dashboard.mostrarError("¡AVERÍA en " + cadena.obtenerIdentificadorCadena() + "!");
+            Dashboard.mostrarMensaje("Llamando a un Mecánico de Cinta...");
+            cadena.provocarAveria();
+        } else {
+            ejecutarPasoComplejo(cadena);
+        }
+    }
+    
     public int obtenerReloj() { return reloj; }
 }
