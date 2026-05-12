@@ -262,11 +262,12 @@ public class InterfazTextual {
         int tipo = leerEntero("Vehículo (1.Turismo 2.Biplaza 3.Furgoneta): ");
         String color = leerTexto("Color: ");
         double tara = leerDecimal("Tara: ");
+        double pesoMaximo = leerDecimal("Peso máximo: ");
         Vehiculo v = (tipo == 2)
-            ? new VehiculoBiplaza(color, 2, tara, tara + 500)
+            ? new VehiculoBiplaza(color, 2, tara, pesoMaximo)
             : (tipo == 3)
-                ? new VehiculoFurgoneta(color, 3, tara, tara + 1500)
-                : new VehiculoTurismo(color, 5, tara, tara + 800);
+                ? new VehiculoFurgoneta(color, 3, tara, pesoMaximo)
+                : new VehiculoTurismo(color, 5, tara, pesoMaximo);
         planificador.añadirPedido(v);
         Dashboard.mostrarMensaje("Pedido encolado.");
     }
@@ -362,11 +363,11 @@ public class InterfazTextual {
 
     private void consultarHistorial() {
         try {
-            Date d = SDF.parse(leerTexto("Fecha inicio (dd/MM/yyyy): "));
-            Date h = SDF.parse(leerTexto("Fecha fin (dd/MM/yyyy): "));
+            Date diaDesde = SDF.parse(leerTexto("Fecha inicio (dd/MM/yyyy): "));
+            Date diaHasta = SDF.parse(leerTexto("Fecha fin (dd/MM/yyyy): "));
             List<RegistroMontaje> logs = almacen.consultarHistorialPorFecha(
-                d,
-                h
+                diaDesde,
+                diaHasta
             );
             for (RegistroMontaje r : logs)
                 Dashboard.imprimirCadena(r.toString());

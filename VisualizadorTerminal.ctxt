@@ -1,14 +1,16 @@
 #BlueJ class context
 comment0.target=VisualizadorTerminal
 comment0.text=\r\n\ Implementaci\u00F3n\ de\ la\ interfaz\ de\ visualizaci\u00F3n\ para\ salida\ por\ consola\ (System.out).\r\n\ @author\ Guillermo\ Bernal\r\n\ @version\ 10\ de\ mayo\ de\ 2026\r\n
-comment1.params=informacionAlmacen\ informacionCadenas
-comment1.target=void\ imprimirEstadoSistema(java.lang.String,\ java.lang.String)
-comment2.params=mensaje
-comment2.target=void\ imprimirCadena(java.lang.String)
+comment1.params=
+comment1.target=VisualizadorTerminal()
+comment2.params=informacionAlmacen\ informacionCadenas
+comment2.target=void\ imprimirEstadoSistema(java.lang.String,\ java.lang.String)
 comment3.params=mensaje
-comment3.target=java.lang.String\ leerTexto(java.lang.String)
+comment3.target=void\ imprimirCadena(java.lang.String)
 comment4.params=mensaje
-comment4.target=void\ imprimirMensaje(java.lang.String)
-comment5.params=error
-comment5.target=void\ imprimirError(java.lang.String)
-numComments=6
+comment4.target=java.lang.String\ leerTexto(java.lang.String)
+comment5.params=mensaje
+comment5.target=void\ imprimirMensaje(java.lang.String)
+comment6.params=error
+comment6.target=void\ imprimirError(java.lang.String)
+numComments=7
