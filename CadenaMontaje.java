@@ -63,7 +63,7 @@ public class CadenaMontaje
         ComponenteTipo[] fases = ComponenteTipo.values();
         if (estadoActual <= fases.length) {
             TrabajadorOperario operarioActual = operarios[estadoActual - 1];
-            // Eficiente: 1 tick. Estándar: 3 ticks (enunciado sec. 3a)
+            // eficiente 1 tick, estandar 3 ticks
             int ticksNecesarios = (operarioActual != null &&
                 operarioActual.obtenerNivel() == TrabajadorNivelProductividad.EFICIENTE) ? 1 : 3;
 

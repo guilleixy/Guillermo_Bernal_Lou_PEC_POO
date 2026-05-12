@@ -17,4 +17,5 @@ comment7.params=numCilindros
 comment7.target=void\ establecerNumCilindros(int)
 comment8.params=
 comment8.target=java.lang.String\ obtenerDatosTecnicos()
+comment8.text=\r\n\ Genera\ una\ cadena\ con\ los\ datos\ t\u00E9cnicos\ base\ del\ motor.\r\n\ @return\ String\ formateado\ con\ cilindrada,\ potencia\ y\ cilindros.\r\n
 numComments=9

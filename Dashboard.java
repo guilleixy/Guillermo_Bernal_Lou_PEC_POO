@@ -28,4 +28,18 @@ public class Dashboard
             visualizador.imprimirError(error);
         }
     }
+    
+    public static void imprimirCadena(String texto){
+        if (visualizador != null) {
+            visualizador.imprimirCadena(texto);
+        }
+    }
+    
+    public static String leerTexto(String mensaje){
+       if (visualizador != null) {
+            return visualizador.leerTexto(mensaje);
+        } 
+        return null;
+    }
+    
 }

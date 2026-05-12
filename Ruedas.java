@@ -32,11 +32,20 @@ public class Ruedas extends ComponenteVehiculo
     public void establecerCodigoVelocidad(double codigoVelocidad) { this.codigoVelocidad = codigoVelocidad; }
     public void establecerTipo(RuedasTipo tipo) { this.tipo = tipo; }
     
+    
+    /**
+     * Genera una cadena con los datos técnicos específicos de las ruedas.
+     * @return String con ancho, diametro, indiceCarga, códigoVelocidad y tipo formateados.
+     */
     @Override
     public String obtenerDatosTecnicos(){
         return ancho + "ancho_" + diametro + "diametro_" + indiceCarga + "indiceCarga_" + codigoVelocidad + "codigoVelocidad_" + tipo + "tipo";
     }
     
+    /**
+     * Genera una cadena con los datos técnicos base de las rueda.
+     * @return String formateado con sus datos técnicos.
+     */
     @Override
     public String obtenerIdentificador(){
         return "RUEDAS_" + obtenerDatosTecnicos();

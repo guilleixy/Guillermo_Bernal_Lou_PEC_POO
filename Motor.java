@@ -24,6 +24,10 @@ public abstract class Motor extends ComponenteVehiculo
     public int obtenerNumCilindros() { return numCilindros; }
     public void establecerNumCilindros(int numCilindros) { this.numCilindros = numCilindros; }
     
+    /**
+     * Genera una cadena con los datos técnicos base del motor.
+     * @return String formateado con cilindrada, potencia y cilindros.
+     */
     public String obtenerDatosTecnicos() {
         return cilindrada + "cc_" + potencia + "cv_" + numCilindros + "cil";
     }

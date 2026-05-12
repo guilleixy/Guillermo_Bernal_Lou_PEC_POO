@@ -6,6 +6,8 @@
 public interface VisualizadorDatos
 {
     void imprimirEstadoSistema(String informacionAlmacen, String informacionCadenas);
+    void imprimirCadena(String mensaje);
+    String leerTexto(String mensaje);
     void imprimirMensaje(String mensaje);
     void imprimirError(String error);
 }

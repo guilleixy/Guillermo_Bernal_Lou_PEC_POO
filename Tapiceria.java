@@ -35,12 +35,19 @@ public class Tapiceria extends ComponenteVehiculo
     public void establecerColor(String color) { this.color = color; }
     public void establecerMaterial(TapiceriaTipoMaterial material) { this.material = material; }
     
-    
+    /**
+     * Genera una cadena con los datos técnicos específicos de la tapicería.
+     * @return String con color, metros y material formateados.
+     */
     @Override
     public String obtenerDatosTecnicos(){
         return color + "color_" + metrosCuadradosTela + "metrosCuadradosTela_" + material + "material";
     }
     
+    /**
+     * Genera un identificador único basado en el tipo de componente y sus datos técnicos.
+     * @return Identificador único de la tapicería.
+     */
     @Override
     public String obtenerIdentificador(){
         return "TAPICERIA_" + obtenerDatosTecnicos();

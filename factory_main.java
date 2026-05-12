@@ -20,7 +20,6 @@ public class factory_main
         Dashboard dashboard = new Dashboard();
         Dashboard.configurarVisualizador(new VisualizadorTerminal());
 
-        // Tres cadenas de montaje (una por tipo de vehículo según el enunciado)
         List<CadenaMontaje> listaCadenas = new ArrayList<>();
         listaCadenas.add(new CadenaMontaje("Línea A - Turismo"));
         listaCadenas.add(new CadenaMontaje("Línea B - Biplaza"));
@@ -29,7 +28,7 @@ public class factory_main
         Planificador planificador = new Planificador(listaCadenas, rrhh, almacen);
         new SistemaGestion(almacen, rrhh, dashboard, planificador);
 
-        Dashboard.mostrarMensaje("¡Sistema de Gestión de Fábrica iniciado!");
+        Dashboard.mostrarMensaje("¡Sistema iniciado!");
 
         new InterfazTextual(almacen, rrhh, planificador, listaCadenas).iniciar();
     }
