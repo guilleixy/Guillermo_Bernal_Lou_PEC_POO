@@ -7,7 +7,7 @@ import java.util.Date;
  */
 public class TrabajadorAdministradorSistema extends Trabajador
 {
-    // 2 seg para el sistema de gestión + 3 seg para las cadenas de montaje (enunciado sec. 3d)
+    // 2 seg para el sistema de gestión + 3 seg para las cadenas de montaje
     private static final int TICKS_RESTAURAR = 5;
 
     public TrabajadorAdministradorSistema(String dni, String nombre, String apellidos, String direccion, int numSeguridadSocial, double salario, TrabajadorPuesto puesto, Date fechaIngreso){

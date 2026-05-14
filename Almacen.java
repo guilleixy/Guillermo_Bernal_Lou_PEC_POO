@@ -31,9 +31,9 @@ public class Almacen implements IAlmacen
     
     @Override
     public void actualizarVehiculo(Vehiculo v) {
-        int index = stockVehiculos.indexOf(v);
-        if (index != -1) {
-            stockVehiculos.set(index, v);
+        int indice = stockVehiculos.indexOf(v);
+        if (indice != -1) {
+            stockVehiculos.set(indice, v);
         }
     }
     
@@ -109,21 +109,21 @@ public class Almacen implements IAlmacen
     }
 
     @Override
-    public String obtenerEstadoCompleto(){
-        StringBuilder reporte = new StringBuilder("--- ESTADO ACTUAL DEL ALMACÉN ---\n");
-        reporte.append("COMPONENTES EN STOCK:\n");
+    public String obtenerEstadoCompleto() {
+        String reporte = "--- ESTADO ACTUAL DEL ALMACÉN ---\n";
+        reporte += "COMPONENTES EN STOCK:\n";
         
         if (stockComponentes.isEmpty()) {
-            reporte.append("- Sin existencias registradas.\n");
+            reporte += "- Sin existencias registradas.\n";
         } else {
             for (Map.Entry<String, Integer> entrada : stockComponentes.entrySet()) {
-                reporte.append(String.format(" > %s: %d unidades\n", entrada.getKey(), entrada.getValue()));
+                reporte += " > " + entrada.getKey() + ": " + entrada.getValue() + " unidades\n";
             }
         }
         
-        reporte.append("VEHÍCULOS TERMINADOS: ").append(stockVehiculos.size()).append("\n");
-        reporte.append("----------------------------------");
+        reporte += "VEHÍCULOS TERMINADOS: " + stockVehiculos.size() + "\n";
+        reporte += "----------------------------------";
         
-        return reporte.toString();
+        return reporte;
     }
 }
