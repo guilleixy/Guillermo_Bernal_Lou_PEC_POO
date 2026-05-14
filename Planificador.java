@@ -73,10 +73,78 @@ public class Planificador {
     }
 
     /**
+     * Verifica que existan los trabajadores mínimos necesarios para el modo indicado.
+     * @return true si la plantilla es suficiente, false si falta personal.
+     */
+    private boolean validarPlantilla(SimulacionModo modo) {
+        // Contar operarios registrados
+        int numOperarios = 0;
+        for (Trabajador t : rrhh.obtenerEmpleados()) {
+            if (t.obtenerPuesto() == TrabajadorPuesto.OPERARIO) numOperarios++;
+        }
+        // Se necesitan al menos 4 operarios por cadena que puede estar activa simultáneamente
+        int cadenasActivas = cadenasMontaje.size();
+        int operariosNecesarios = 4 * cadenasActivas;
+        if (numOperarios < 4) {
+            Dashboard.mostrarError(
+                "Simulación cancelada: se necesitan al menos 4 operarios (hay " + numOperarios + ")."
+            );
+            return false;
+        }
+        if (numOperarios < operariosNecesarios) {
+            Dashboard.mostrarMensaje(
+                "Aviso: hay " + numOperarios + " operarios para " + cadenasActivas +
+                " cadenas. Algunas cadenas pueden quedar inactivas."
+            );
+        }
+
+        if (modo == SimulacionModo.COMPLEJA || modo == SimulacionModo.MUY_COMPLEJA) {
+            boolean hayMecanico = false;
+            for (Trabajador t : rrhh.obtenerEmpleados()) {
+                if (t.obtenerPuesto() == TrabajadorPuesto.MECANICO_CINTA) { hayMecanico = true; break; }
+            }
+            if (!hayMecanico) {
+                Dashboard.mostrarError(
+                    "Simulación cancelada: el modo " + modo + " requiere al menos un Mecánico de Cinta."
+                );
+                return false;
+            }
+        }
+
+        if (modo == SimulacionModo.MUY_COMPLEJA) {
+            boolean hayGestor = false;
+            boolean hayAdmin = false;
+            for (Trabajador t : rrhh.obtenerEmpleados()) {
+                if (t.obtenerPuesto() == TrabajadorPuesto.GESTOR_PLANTA) hayGestor = true;
+                if (t.obtenerPuesto() == TrabajadorPuesto.ADMINISTRADOR_SISTEMAS) hayAdmin = true;
+            }
+            if (!hayGestor) {
+                Dashboard.mostrarError(
+                    "Simulación cancelada: el modo MUY_COMPLEJA requiere un Gestor de Planta."
+                );
+                return false;
+            }
+            if (!hayAdmin) {
+                Dashboard.mostrarError(
+                    "Simulación cancelada: el modo MUY_COMPLEJA requiere un Administrador de Sistemas."
+                );
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * Inicia el ciclo de simulación de la fábrica.
      * El proceso continúa hasta que todos los vehículos en curso han sido finalizados.
      */
     public void empezarSimulacion(SimulacionModo modo) {
+        if (!validarPlantilla(modo)) return;
+        if (colaProduccion.isEmpty()) {
+            Dashboard.mostrarError("Simulación cancelada: no hay pedidos en cola.");
+            return;
+        }
         Dashboard.mostrarMensaje("Iniciando simulación en modo: " + modo);
         boolean trabajoPendiente = true;
 
@@ -151,8 +219,7 @@ public class Planificador {
     }
 
     private void ejecutarPasoSimple(CadenaMontaje cadena) {
-        ComponenteTipo completado = cadena.avanzarFase();
-        registrarSiCompletado(completado, cadena);
+        ejecutarComprobacionStock(cadena);
     }
 
     private void ejecutarPasoComplejo(CadenaMontaje cadena) {

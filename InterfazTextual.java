@@ -1,6 +1,8 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -290,20 +292,197 @@ public class InterfazTextual {
     }
 
     private void menuListados() {
-        Dashboard.imprimirCadena("\n--- LISTADOS ---");
+        boolean volver = false;
+        while (!volver) {
+            Dashboard.imprimirCadena("\n--- LISTADOS Y ESTADÍSTICAS ---");
+            Dashboard.imprimirCadena(" 1. Listado de operarios");
+            Dashboard.imprimirCadena(" 2. Listado de vehículos ensamblados");
+            Dashboard.imprimirCadena(" 3. Configuraciones con mayor tasa de ensamblaje");
+            Dashboard.imprimirCadena(" 4. Cadenas de montaje por fecha");
+            Dashboard.imprimirCadena(" 0. Volver");
+            switch (leerEntero("Opción: ")) {
+                case 1: listadoOperarios(); break;
+                case 2: listadoVehiculos(); break;
+                case 3: listadoTasaEnsamblaje(); break;
+                case 4: listadoCadenasPorFecha(); break;
+                case 0: volver = true; break;
+                default: Dashboard.mostrarError("Opción no válida.");
+            }
+        }
+    }
+
+    /**
+     * Listado 1: operarios con filtrado por productividad y ordenación alfabética.
+     */
+    private void listadoOperarios() {
+        Dashboard.imprimirCadena("\n--- LISTADO DE OPERARIOS ---");
+        Dashboard.imprimirCadena("Filtrar por nivel: 1.Todos  2.Estándar  3.Eficiente");
+        int filtro = leerEntero("Selección: ");
+        Dashboard.imprimirCadena("Ordenar: 1.Nombre A-Z  2.Nombre Z-A  3.Nº montajes desc.");
+        int orden = leerEntero("Selección: ");
+
+        List<TrabajadorOperario> lista = new ArrayList<>();
+        for (Trabajador t : rrhh.obtenerEmpleados()) {
+            if (!(t instanceof TrabajadorOperario)) continue;
+            TrabajadorOperario op = (TrabajadorOperario) t;
+            if (filtro == 2 && op.obtenerNivel() != TrabajadorNivelProductividad.ESTANDAR) continue;
+            if (filtro == 3 && op.obtenerNivel() != TrabajadorNivelProductividad.EFICIENTE) continue;
+            lista.add(op);
+        }
+
+        if (orden == 2) {
+            Collections.sort(lista, new Comparator<TrabajadorOperario>() {
+                public int compare(TrabajadorOperario a, TrabajadorOperario b) {
+                    return b.obtenerNombre().compareToIgnoreCase(a.obtenerNombre());
+                }
+            });
+        } else if (orden == 3) {
+            Collections.sort(lista, new Comparator<TrabajadorOperario>() {
+                public int compare(TrabajadorOperario a, TrabajadorOperario b) {
+                    return b.obtenerNumeroMontajes() - a.obtenerNumeroMontajes();
+                }
+            });
+        } else {
+            Collections.sort(lista, new Comparator<TrabajadorOperario>() {
+                public int compare(TrabajadorOperario a, TrabajadorOperario b) {
+                    return a.obtenerNombre().compareToIgnoreCase(b.obtenerNombre());
+                }
+            });
+        }
+
+        if (lista.isEmpty()) {
+            Dashboard.mostrarMensaje("No hay operarios con esos criterios.");
+            return;
+        }
+        Dashboard.imprimirCadena(String.format("%-12s %-20s %-12s %s", "DNI", "Nombre", "Nivel", "Montajes"));
+        Dashboard.imprimirCadena("------------------------------------------------------------");
+        for (TrabajadorOperario op : lista) {
+            Dashboard.imprimirCadena(String.format("%-12s %-20s %-12s %d",
+                op.obtenerDni(), op.obtenerNombre(), op.obtenerNivel(), op.obtenerNumeroMontajes()));
+        }
+    }
+
+    /**
+     * Listado 2: vehículos ensamblados con filtrado por componente y ordenación alfabética.
+     */
+    private void listadoVehiculos() {
+        Dashboard.imprimirCadena("\n--- LISTADO DE VEHÍCULOS ENSAMBLADOS ---");
+        Dashboard.imprimirCadena("Filtrar por componente (vacío = todos): ");
+        String filtroComp = leerTexto("Componente (CHASIS/MOTOR/TAPICERIA/RUEDAS, vacío=todos): ").trim().toUpperCase();
+        Dashboard.imprimirCadena("Ordenar: 1.Tipo A-Z  2.Tipo Z-A  3.Color A-Z");
+        int orden = leerEntero("Selección: ");
+
+        List<Vehiculo> lista = new ArrayList<>();
+        for (Vehiculo v : almacen.obtenerVehiculosTerminados()) {
+            if (!filtroComp.isEmpty()) {
+                boolean tieneComponente = false;
+                for (ComponenteTipo ct : v.obtenerComponentesInstalados()) {
+                    if (ct.toString().contains(filtroComp)) { tieneComponente = true; break; }
+                }
+                if (!tieneComponente) continue;
+            }
+            lista.add(v);
+        }
+
+        if (orden == 2) {
+            Collections.sort(lista, new Comparator<Vehiculo>() {
+                public int compare(Vehiculo a, Vehiculo b) {
+                    return b.obtenerTipo().compareToIgnoreCase(a.obtenerTipo());
+                }
+            });
+        } else if (orden == 3) {
+            Collections.sort(lista, new Comparator<Vehiculo>() {
+                public int compare(Vehiculo a, Vehiculo b) {
+                    return a.obtenerColor().compareToIgnoreCase(b.obtenerColor());
+                }
+            });
+        } else {
+            Collections.sort(lista, new Comparator<Vehiculo>() {
+                public int compare(Vehiculo a, Vehiculo b) {
+                    return a.obtenerTipo().compareToIgnoreCase(b.obtenerTipo());
+                }
+            });
+        }
+
+        if (lista.isEmpty()) {
+            Dashboard.mostrarMensaje("No hay vehículos con esos criterios.");
+            return;
+        }
+        Dashboard.imprimirCadena(String.format("%-15s %-10s %-8s %-10s %s", "Tipo", "Color", "Plazas", "Tara", "Componentes"));
+        Dashboard.imprimirCadena("-----------------------------------------------------------------------");
+        for (Vehiculo v : lista) {
+            Dashboard.imprimirCadena(String.format("%-15s %-10s %-8d %-10.1f %s",
+                v.obtenerTipo(), v.obtenerColor(), v.obtenerNumPlazas(), v.obtenerTara(),
+                v.obtenerComponentesInstalados().toString()));
+        }
+    }
+
+    /**
+     * Listado 3: configuraciones de vehículos con mayor tasa de ensamblaje (más producidas).
+     */
+    private void listadoTasaEnsamblaje() {
+        Dashboard.imprimirCadena("\n--- CONFIGURACIONES CON MAYOR TASA DE ENSAMBLAJE ---");
         List<Vehiculo> terminados = almacen.obtenerVehiculosTerminados();
         if (terminados.isEmpty()) {
-            Dashboard.mostrarMensaje("No hay datos de producción acumulados.");
-        } else {
-            for (Vehiculo v : terminados) {
-                Dashboard.imprimirCadena(
-                    "Vehículo: " +
-                        v.obtenerTipo() +
-                        " [" +
-                        v.obtenerColor() +
-                        "]"
-                );
+            Dashboard.mostrarMensaje("No hay vehículos producidos.");
+            return;
+        }
+
+        // Agrupamos por tipo+color como "configuración"
+        Map<String, Integer> conteo = new HashMap<>();
+        for (Vehiculo v : terminados) {
+            String clave = v.obtenerTipo() + " [" + v.obtenerColor() + "]";
+            conteo.put(clave, conteo.getOrDefault(clave, 0) + 1);
+        }
+
+        List<Map.Entry<String, Integer>> entradas = new ArrayList<>(conteo.entrySet());
+        Collections.sort(entradas, new Comparator<Map.Entry<String, Integer>>() {
+            public int compare(Map.Entry<String, Integer> a, Map.Entry<String, Integer> b) {
+                return b.getValue() - a.getValue();
             }
+        });
+
+        Dashboard.imprimirCadena(String.format("%-30s %s", "Configuración", "Unidades"));
+        Dashboard.imprimirCadena("--------------------------------------");
+        for (Map.Entry<String, Integer> e : entradas) {
+            Dashboard.imprimirCadena(String.format("%-30s %d", e.getKey(), e.getValue()));
+        }
+    }
+
+    /**
+     * Listado 4: cadenas de montaje filtradas por fecha, con vehículos y sus componentes.
+     */
+    private void listadoCadenasPorFecha() {
+        Dashboard.imprimirCadena("\n--- CADENAS DE MONTAJE POR FECHA ---");
+        try {
+            Date desde = SDF.parse(leerTexto("Fecha inicio (dd/MM/yyyy): "));
+            Date hasta = SDF.parse(leerTexto("Fecha fin   (dd/MM/yyyy): "));
+
+            List<RegistroMontaje> registros = almacen.consultarHistorialPorFecha(desde, hasta);
+            if (registros.isEmpty()) {
+                Dashboard.mostrarMensaje("No hay actividad en ese período.");
+                return;
+            }
+
+            // Agrupamos los registros por cadena
+            Map<String, List<RegistroMontaje>> porCadena = new LinkedHashMap<>();
+            for (RegistroMontaje r : registros) {
+                String cadena = r.obtenerIdentificadorCadena();
+                if (!porCadena.containsKey(cadena)) porCadena.put(cadena, new ArrayList<>());
+                porCadena.get(cadena).add(r);
+            }
+
+            for (Map.Entry<String, List<RegistroMontaje>> entrada : porCadena.entrySet()) {
+                Dashboard.imprimirCadena("\nCadena: " + entrada.getKey());
+                Dashboard.imprimirCadena("  Fecha                 | Vehículo       | Componente");
+                Dashboard.imprimirCadena("  -------------------------------------------------------");
+                for (RegistroMontaje r : entrada.getValue()) {
+                    Dashboard.imprimirCadena(String.format("  %-22s | %-14s | %s",
+                        SDF.format(r.obtenerFecha()), r.obtenerTipoVehiculo(), r.obtenerComponente()));
+                }
+            }
+        } catch (ParseException e) {
+            Dashboard.mostrarError("Fecha no válida. Use el formato dd/MM/yyyy.");
         }
     }
 
