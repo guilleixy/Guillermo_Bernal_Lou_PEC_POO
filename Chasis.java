@@ -18,6 +18,9 @@ public class Chasis extends ComponenteVehiculo
         return "chasis_estándar";
     }
     
+    @Override
+    public ComponenteTipo obtenerTipo(){ return ComponenteTipo.CHASIS; }
+
     /**
      * Genera un identificador único basado en el tipo de componente y sus datos técnicos.
      * @return Identificador genérico de chasis.

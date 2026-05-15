@@ -24,7 +24,10 @@ public class Ruedas extends ComponenteVehiculo
     public double obtenerDiametro() { return diametro; }
     public double obtenerIndiceCarga() { return indiceCarga; }
     public double obtenerCodigoVelocidad() { return codigoVelocidad; }
-    public RuedasTipo obtenerTipo() { return tipo; }
+    public RuedasTipo obtenerTipoRuedas() { return tipo; }
+
+    @Override
+    public ComponenteTipo obtenerTipo(){ return ComponenteTipo.RUEDAS; }
 
     public void establecerAncho(double ancho) { this.ancho = ancho; }
     public void establecerDiametro(double diametro) { this.diametro = diametro; }

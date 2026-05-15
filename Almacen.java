@@ -1,5 +1,5 @@
+import java.util.EnumMap;
 import java.util.Map;
-import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,12 +12,12 @@ import java.util.Date;
  */
 public class Almacen implements IAlmacen
 {
-    private Map<String, Integer> stockComponentes;
+    private Map<ComponenteTipo, Integer> stockComponentes;
     private List<Vehiculo> stockVehiculos;
     private List<RegistroMontaje> historialMontaje;
-    
+
     public Almacen() {
-        this.stockComponentes = new HashMap<>();
+        this.stockComponentes = new EnumMap<>(ComponenteTipo.class);
         this.stockVehiculos = new ArrayList<>();
         this.historialMontaje = new ArrayList<>();
     }
@@ -49,41 +49,50 @@ public class Almacen implements IAlmacen
     
     @Override
     public boolean hayPiezasSuficientes(String tipoComponente) {
-        int cantidadActual = obtenerStockComponente(tipoComponente);
-        
-        if (cantidadActual > 0) {
-            return true;
-        } else {
-            Dashboard.mostrarError("Stock agotado para el componente: " + tipoComponente);
-            return false;
+        try {
+            ComponenteTipo tipo = ComponenteTipo.valueOf(tipoComponente.toUpperCase());
+            if (stockComponentes.getOrDefault(tipo, 0) > 0) return true;
+        } catch (IllegalArgumentException e) {
+            // tipo no reconocido
         }
-    }
-    
-    @Override
-    public int obtenerStockComponente(String identificadorComponente){
-        return stockComponentes.getOrDefault(identificadorComponente, 0);
-    }
-    
-    @Override
-    public void añadirStockComponente(ComponenteVehiculo c, int cantidad){
-        String clave = c.obtenerIdentificador(); 
-        stockComponentes.put(clave, stockComponentes.getOrDefault(clave, 0) + cantidad);
-        Dashboard.mostrarMensaje("Almacén: Stock aumentado. " + clave + ": " + stockComponentes.get(clave));
-    }
-    
-    @Override
-    public void quitarStockComponente(ComponenteVehiculo c, int cantidad){
-        quitarStockComponente(c.obtenerIdentificador(), cantidad);
+        Dashboard.mostrarError("Stock agotado para el componente: " + tipoComponente);
+        return false;
     }
 
     @Override
-    public void quitarStockComponente(String identificador, int cantidad){
-        int stockActual = obtenerStockComponente(identificador);
-        if(stockActual >= cantidad){
-            stockComponentes.put(identificador, stockActual - cantidad);
-            Dashboard.mostrarMensaje("Almacén: Stock disminuido. " + identificador + ": " + stockComponentes.get(identificador));
-        } else {
-            Dashboard.mostrarError("STOCK INSUFICIENTE de " + identificador + ". Se requieren " + cantidad + " y solo hay " + stockActual);
+    public int obtenerStockComponente(String tipoComponente) {
+        try {
+            return stockComponentes.getOrDefault(ComponenteTipo.valueOf(tipoComponente.toUpperCase()), 0);
+        } catch (IllegalArgumentException e) {
+            return 0;
+        }
+    }
+
+    @Override
+    public void añadirStockComponente(ComponenteVehiculo c, int cantidad) {
+        ComponenteTipo tipo = c.obtenerTipo();
+        stockComponentes.put(tipo, stockComponentes.getOrDefault(tipo, 0) + cantidad);
+        Dashboard.mostrarMensaje("Almacén: Stock aumentado. " + tipo + ": " + stockComponentes.get(tipo));
+    }
+
+    @Override
+    public void quitarStockComponente(ComponenteVehiculo c, int cantidad) {
+        quitarStockComponente(c.obtenerTipo().toString(), cantidad);
+    }
+
+    @Override
+    public void quitarStockComponente(String tipoComponente, int cantidad) {
+        try {
+            ComponenteTipo tipo = ComponenteTipo.valueOf(tipoComponente.toUpperCase());
+            int actual = stockComponentes.getOrDefault(tipo, 0);
+            if (actual >= cantidad) {
+                stockComponentes.put(tipo, actual - cantidad);
+                Dashboard.mostrarMensaje("Almacén: Stock disminuido. " + tipo + ": " + stockComponentes.get(tipo));
+            } else {
+                Dashboard.mostrarError("STOCK INSUFICIENTE de " + tipo + ". Se requieren " + cantidad + " y solo hay " + actual);
+            }
+        } catch (IllegalArgumentException e) {
+            Dashboard.mostrarError("Tipo de componente no reconocido: " + tipoComponente);
         }
     }
     
@@ -116,7 +125,7 @@ public class Almacen implements IAlmacen
         if (stockComponentes.isEmpty()) {
             reporte += "- Sin existencias registradas.\n";
         } else {
-            for (Map.Entry<String, Integer> entrada : stockComponentes.entrySet()) {
+            for (Map.Entry<ComponenteTipo, Integer> entrada : stockComponentes.entrySet()) {
                 reporte += " > " + entrada.getKey() + ": " + entrada.getValue() + " unidades\n";
             }
         }

@@ -13,6 +13,8 @@ public abstract class ComponenteVehiculo
      */
     public abstract String obtenerIdentificador();
     
+    public abstract ComponenteTipo obtenerTipo();
+
     /**
      * Devuelve una representación detallada de las especificaciones técnicas 
      * del componente (cilindrada, color, dimensiones, etc.).

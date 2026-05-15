@@ -27,6 +27,9 @@ public class Tapiceria extends ComponenteVehiculo
     public double obtenerMetrosCuadradosTela() { return metrosCuadradosTela; }
     public TapiceriaTipoMaterial obtenerMaterial() { return material; }
 
+    @Override
+    public ComponenteTipo obtenerTipo(){ return ComponenteTipo.TAPICERIA; }
+
     public void establecerMetrosCuadradosTela(double metrosCuadradosTela) {
         if (metrosCuadradosTela >= 0) {
             this.metrosCuadradosTela = metrosCuadradosTela;

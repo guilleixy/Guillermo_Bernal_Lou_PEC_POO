@@ -252,23 +252,18 @@ public class Planificador {
         ejecutarComprobacionStock(cadena);
     }
 
-    // Stock check compartido por los modos COMPLEJA y MUY_COMPLEJA
     private void ejecutarComprobacionStock(CadenaMontaje cadena) {
-        String tipoPieza =
-            ComponenteTipo.values()[cadena.obtenerEstadoActual() -
-            1].toString();
-        if (almacen.hayPiezasSuficientes(tipoPieza)) {
-            ComponenteTipo completado = cadena.avanzarFase();
+        String tipoPieza = ComponenteTipo.values()[cadena.obtenerEstadoActual() - 1].toString();
+        // Comprobar y reservar stock solo al inicio de la fase (tick 0), no en cada tick intermedio
+        if (cadena.obtenerTicksEnFaseActual() == 0) {
+            if (!almacen.hayPiezasSuficientes(tipoPieza)) {
+                Dashboard.mostrarError("Cadena " + cadena.obtenerIdentificadorCadena() + " parada por falta de: " + tipoPieza);
+                return;
+            }
             almacen.quitarStockComponente(tipoPieza, 1);
-            registrarSiCompletado(completado, cadena);
-        } else {
-            Dashboard.mostrarError(
-                "Cadena " +
-                    cadena.obtenerIdentificadorCadena() +
-                    " parada por falta de: " +
-                    tipoPieza
-            );
         }
+        ComponenteTipo completado = cadena.avanzarFase();
+        registrarSiCompletado(completado, cadena);
     }
 
     private void registrarSiCompletado(

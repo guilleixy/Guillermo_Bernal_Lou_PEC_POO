@@ -73,13 +73,16 @@ public class CadenaMontaje
                 ComponenteTipo faseCompletada = fases[estadoActual - 1];
                 vehiculoEnCurso.instalarComponente(faseCompletada);
 
-                for (TrabajadorOperario op : operarios) {
-                    if (op != null) op.registrarMontaje();
-                }
-
                 Dashboard.mostrarMensaje(identificadorCadena + ": Fase " + faseCompletada + " completada.");
                 estadoActual++;
                 ticksEnFaseActual = 0;
+
+                if(vehiculoEnCurso.estaTerminado()){
+                    for(TrabajadorOperario op : operarios){
+                        if( op != null ) op.registrarMontaje();
+                    }
+                }
+
                 return faseCompletada;
             } else {
                 Dashboard.mostrarMensaje(identificadorCadena + ": Fase " + fases[estadoActual - 1] +
@@ -150,6 +153,7 @@ public class CadenaMontaje
         this.operarios = new TrabajadorOperario[4];
     }
     
+    public int obtenerTicksEnFaseActual() { return ticksEnFaseActual; };
     public boolean estaAveriada() { return averiada; }
     public int obtenerTicksPendientesReparacion() { return ticksPendientesReparacion; }
     public String obtenerIdentificadorCadena() { return identificadorCadena; }
