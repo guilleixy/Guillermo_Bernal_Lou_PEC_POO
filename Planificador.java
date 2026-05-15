@@ -165,7 +165,6 @@ public class Planificador {
                 }
             }
 
-            // Asignar vehículos pendientes a cadenas libres antes de procesar
             gestionarAsignaciones();
 
             for (CadenaMontaje cadena : cadenasMontaje) {
@@ -197,7 +196,6 @@ public class Planificador {
                 }
             }
 
-            // Mantener el bucle activo mientras queden pedidos sin asignar
             if (!colaProduccion.isEmpty()) trabajoPendiente = true;
         }
 
@@ -254,7 +252,7 @@ public class Planificador {
 
     private void ejecutarComprobacionStock(CadenaMontaje cadena) {
         String tipoPieza = ComponenteTipo.values()[cadena.obtenerEstadoActual() - 1].toString();
-        // Comprobar y reservar stock solo al inicio de la fase (tick 0), no en cada tick intermedio
+        // el stock solo se comprueba y reserva al inicio de cada fase, no en cada tick
         if (cadena.obtenerTicksEnFaseActual() == 0) {
             if (!almacen.hayPiezasSuficientes(tipoPieza)) {
                 Dashboard.mostrarError("Cadena " + cadena.obtenerIdentificadorCadena() + " parada por falta de: " + tipoPieza);
@@ -282,7 +280,6 @@ public class Planificador {
         }
     }
 
-    // COMPLEJA: el mecánico actúa directamente sin intermediario
     private void gestionarReparacionDirecta(CadenaMontaje cadena) {
         if (cadena.obtenerTicksPendientesReparacion() == 0) {
             Trabajador t = rrhh.buscarTrabajadorPorPuesto(
@@ -311,7 +308,6 @@ public class Planificador {
         }
     }
 
-    // MUY_COMPLEJA: el gestor de planta localiza y supervisa al mecánico
     private void gestionarReparacionConGestor(CadenaMontaje cadena) {
         if (cadena.obtenerTicksPendientesReparacion() == 0) {
             Trabajador t = rrhh.buscarTrabajadorPorPuesto(
@@ -349,7 +345,7 @@ public class Planificador {
         }
     }
 
-    // Eficiente: 1 tick. Estándar: 2-5 ticks aleatorios (enunciado sec. 3d)
+    // eficiente: 1 tick. estandar: 2-5 ticks aleatorios
     private int calcularTicksReparacion(TrabajadorMecanicoCinta mecanico) {
         if (mecanico.obtenerNivel() == TrabajadorNivelProductividad.EFICIENTE) {
             return 1;

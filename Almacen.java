@@ -53,7 +53,7 @@ public class Almacen implements IAlmacen
             ComponenteTipo tipo = ComponenteTipo.valueOf(tipoComponente.toUpperCase());
             if (stockComponentes.getOrDefault(tipo, 0) > 0) return true;
         } catch (IllegalArgumentException e) {
-            // tipo no reconocido
+            Dashboard.mostrarError("Tipo de componente no reconocido: " + tipoComponente);
         }
         Dashboard.mostrarError("Stock agotado para el componente: " + tipoComponente);
         return false;
